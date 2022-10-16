@@ -1,42 +1,53 @@
 <template>
-  <div class="table-wrapper">
-    <table>
-      <caption>
-        다짐을 해보세요
-      </caption>
-      <thead>
-        <tr>
-          <th>이름</th>
-          <th>다짐</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>아아</td>
-          <td>나나</td>
-        </tr>
-      </tbody>
-    </table>
+  <div ref="containerRef" class="container" @mousemove="move">
+    <div ref="lightRef" class="light" />
+    <div ref="hideRef" class="hide" />
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { ref, reactive } from "vue";
+
+const containerRef = ref();
+const lightRef = ref();
+const hideRef = ref();
+
+const pointer = reactive({
+  x: 0,
+  y: 0,
+});
+
+const move = (e) => {
+  //   let windowW = containerRef.value.getBoundingClientRect().width;
+  //   let windowH = containerRef.value.getBoundingClientRect().height;
+  //   const x = e.pageX - windowW;
+  //   const y = e.pageY - windowH;
+  pointer.x = e.clientX;
+  pointer.y = e.clientY;
+  lightRef.value.style.top = `${pointer.y}px`;
+  lightRef.value.style.left = `${pointer.x}px`;
+};
+</script>
 
 <style lang="scss" scoped>
-.table-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: #edf2f7;
-  caption {
-    background: #dee2e6;
+.container {
+  width: 100%;
+  height: 100vh;
+  background: black;
+  .light {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: yellow;
+    transform: translate(-50%, -50%);
   }
-  table {
-    width: 70%;
-    border: 1px solid #e2e8f0;
+  .hide {
+    width: 100px;
+    height: 100px;
     background: white;
-    text-align: center;
   }
 }
 </style>

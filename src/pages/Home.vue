@@ -167,20 +167,20 @@ import { gsap } from "gsap";
 
 const wrapper = ref();
 const sunRef = ref();
-const textValue = ref("새헤 다짐을 적어보세요!");
+const textValue = ref("새해 다짐을 적어보세요!");
 const textData = ref("");
 const textareaRef = ref();
 const buttonRef = ref();
 const data = ref("");
 
 const onFocus = () => {
-  if (textValue.value === "새헤 다짐을 적어보세요!") {
+  if (textValue.value === "새해 다짐을 적어보세요!") {
     textValue.value = "";
   }
 };
 const onBlur = () => {
   if (!textValue.value) {
-    textValue.value = "새헤 다짐을 적어보세요!";
+    textValue.value = "새해 다짐을 적어보세요!";
   }
 };
 
@@ -190,9 +190,9 @@ const tlSubmit = gsap.timeline({
     duration: 0.1,
   },
 });
-const tlTransform = gsap.timeline({ paused: false });
-const submit = () => {
-  if (textValue.value && textValue.value !== "새헤 다짐을 적어보세요!") {
+
+const submitValue = async () => {
+  if (textValue.value && textValue.value !== "새해 다짐을 적어보세요!") {
     textareaRef.value.style.pointerEvents = "none";
     textData.value =
       textValue.value.length > 22
@@ -200,100 +200,112 @@ const submit = () => {
         : textValue.value;
 
     textValue.value = "";
-    setTimeout(() => {
-      tlSubmit
-        .to(".input-text", {
-          delay: 0.5,
-          y: "random(-10, 10)",
-        })
-        .to(".input-text", {
-          y: "random(-10, 10)",
-        })
-        .to(".input-text", {
-          y: "random(-10, 10)",
-        })
-        .to(".input-text", {
-          y: "random(-10, 10)",
-        })
-        .to(".input-text", {
-          y: 0,
-        })
-        .to(".input-text", {
-          delay: 0.5,
-          duration: 1.5,
-          ease: "expo.in",
-          y: -200,
-          scale: 0.1,
-          stagger: {
-            amount: 0.3,
-            from: "start",
-          },
-          onComplete: () => {
-            if (matchMedia("(max-width: 500px)").matches) {
-              gsap.to(wrapper.value, {
-                left: "-30px",
-              });
-              gsap.to(
-                ".dataWrapper",
-                {
-                  left: 0,
-                },
-                "<"
-              );
-            }
-            data.value = `올해에는 꼭 ${textData.value}!`;
-            textData.value = "";
-            tlTransform
-              .to(buttonRef.value, {
-                delay: 1,
-                y: 50,
-                opacity: 0,
-                duration: 0.5,
-              })
-              .to(sunRef.value, {
-                x: 100,
-                y: 100,
-                scale: 1.3,
-                filter: "blur(0)",
-                duration: 0.5,
-              })
-              .to(
-                textareaRef.value,
-                {
-                  minWidth: "100px",
-                  height: "30px",
-                },
-                "<"
-              )
-              .to("#logo1", {
-                opacity: 1,
-              })
-              .to("#logo2", {
-                delay: 0.3,
-                duration: 0.3,
-                opacity: 1,
-              })
-              .from("p", {
-                delay: 1,
-                y: "-100px",
-                duration: 0.5,
-              })
-              .to(
-                "p",
-                {
-                  duration: 0.5,
-                  opacity: 1,
-                },
-                "<"
-              )
-              .to(".test", {
-                opacity: 1,
-                duration: 0.5,
-              });
-          },
-        });
-    }, 0);
   }
+};
+
+const tlTransform = gsap.timeline({ paused: false });
+const submitAni = () => {
+  tlSubmit
+    .to(".input-text", {
+      delay: 0.5,
+      y: "random(-10, 10)",
+    })
+    .to(".input-text", {
+      y: "random(-10, 10)",
+    })
+    .to(".input-text", {
+      y: "random(-10, 10)",
+    })
+    .to(".input-text", {
+      y: "random(-10, 10)",
+    })
+    .to(".input-text", {
+      y: 0,
+    })
+    .to(".input-text", {
+      delay: 0.5,
+      duration: 1.5,
+      ease: "expo.in",
+      y: -200,
+      scale: 0.1,
+      stagger: {
+        amount: 0.3,
+        from: "start",
+      },
+      onComplete: () => {
+        if (matchMedia("(max-width: 500px)").matches) {
+          gsap.to(wrapper.value, {
+            left: "-30px",
+          });
+          gsap.to(
+            ".dataWrapper",
+            {
+              left: 0,
+            },
+            "<"
+          );
+        }
+        data.value = `올해에는 꼭 ${textData.value}!`;
+        textData.value = "";
+        tlTransform
+          .to(buttonRef.value, {
+            delay: 1,
+            y: 50,
+            opacity: 0,
+            duration: 0.5,
+          })
+          .to(
+            sunRef.value,
+            {
+              x: 100,
+              y: 100,
+              scale: 1.3,
+              filter: "blur(0)",
+              duration: 0.5,
+            },
+            "<"
+          )
+          .to(
+            textareaRef.value,
+            {
+              minWidth: "100px",
+              height: "30px",
+            },
+            "<"
+          )
+          .to("#logo1", {
+            opacity: 1,
+          })
+          .to("#logo2", {
+            delay: 0.3,
+            duration: 0.3,
+            opacity: 1,
+          })
+          .from("p", {
+            delay: 1,
+            y: "-100px",
+            duration: 0.5,
+          })
+          .to(
+            "p",
+            {
+              duration: 0.5,
+              opacity: 1,
+            },
+            "<"
+          )
+          .to(".test", {
+            opacity: 1,
+            duration: 0.5,
+          });
+      },
+    });
+};
+
+const submit = () => {
+  submitValue().then(() => {
+    submitAni();
+  });
 };
 </script>
 
@@ -303,8 +315,8 @@ const submit = () => {
   height: 100vh;
   overflow: hidden;
   background: radial-gradient(
-    at 50% 25%,
-    rgba(244, 183, 30, 1) 15%,
+    circle at 50% 25%,
+    rgba(244, 183, 30, 1) 10%,
     rgb(112, 54, 0) 100%
   );
   .wrapper {
