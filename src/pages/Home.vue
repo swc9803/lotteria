@@ -184,15 +184,9 @@ const onBlur = () => {
   }
 };
 
-const tlSubmit = gsap.timeline({
-  delay: 0.5,
-  defaults: {
-    duration: 0.1,
-  },
-});
-
 const submitValue = async () => {
   if (textValue.value && textValue.value !== "새해 다짐을 적어보세요!") {
+    buttonRef.value.style.pointerEvents = "none";
     textareaRef.value.style.pointerEvents = "none";
     textData.value =
       textValue.value.length > 22
@@ -203,8 +197,14 @@ const submitValue = async () => {
   }
 };
 
-const tlTransform = gsap.timeline({ paused: false });
 const submitAni = () => {
+  const tlTransform = gsap.timeline({ paused: false });
+  const tlSubmit = gsap.timeline({
+    delay: 0.5,
+    defaults: {
+      duration: 0.1,
+    },
+  });
   tlSubmit
     .to(".input-text", {
       delay: 0.5,
@@ -238,11 +238,12 @@ const submitAni = () => {
             left: "-30px",
           });
           gsap.to(
-            ".dataWrapper",
+            ".dataWrapper > p",
             {
-              left: 0,
+              left: "30px",
+              duration: 0,
             },
-            "<"
+            ""
           );
         }
         data.value = `올해에는 꼭 ${textData.value}!`;

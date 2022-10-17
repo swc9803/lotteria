@@ -13,7 +13,8 @@
     "firebase-tools": "^11.14.1",
     "gsap": "^3.11.3",
     "vue": "^3.2.13",
-    "vue-router": "^4.0.3"
+    "vue-router": "^4.0.3",
+    "vue3-lottie": "^2.3.0"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.4.0",
