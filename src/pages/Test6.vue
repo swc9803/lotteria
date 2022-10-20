@@ -18,10 +18,6 @@ const pointer = reactive({
 });
 
 const move = (e) => {
-  //   let windowW = containerRef.value.getBoundingClientRect().width;
-  //   let windowH = containerRef.value.getBoundingClientRect().height;
-  //   const x = e.pageX - windowW;
-  //   const y = e.pageY - windowH;
   pointer.x = e.clientX;
   pointer.y = e.clientY;
   lightRef.value.style.top = `${pointer.y}px`;
@@ -31,9 +27,11 @@ const move = (e) => {
 
 <style lang="scss" scoped>
 .container {
+  position: relative;
   width: 100%;
   height: 100vh;
   background: black;
+  overflow: hidden;
   .light {
     position: absolute;
     top: 0;

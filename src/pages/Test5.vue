@@ -4,20 +4,22 @@
       ref="lottieRef"
       width="50%"
       height="50%"
-      :loop="false"
+      :loop="true"
       :auto-play="false"
-      :play-on-hover="true"
-      background-color="black"
+      background-color="transparent"
       :animation-data="coffee"
       @on-complete="onComplete"
     />
+    <!-- :play-on-hover="true" -->
+    <button @click="play">play</button>
+    <button @click="pause">pause</button>
+    <button @click="stop">stop</button>
+    <button @click="speed(1)">speed1</button>
+    <button @click="speed(3)">speed3</button>
+    <button @click="reverse">reverse</button>
+    <button @click="forward">forward</button>
+    <input type="checkbox" @change="check" />
   </div>
-  <button @click="play">play</button>
-  <button @click="pause">pause</button>
-  <button @click="speed(1)">speed1</button>
-  <button @click="speed(3)">speed3</button>
-  <button @click="reverse">reverse</button>
-  <button @click="forward">forward</button>
 </template>
 
 <script setup>
@@ -25,19 +27,23 @@ import { ref } from "vue";
 import { Vue3Lottie } from "vue3-lottie";
 import "vue3-lottie/dist/style.css";
 
-import coffee from "@/assets/lottie.json";
+import coffee from "@/assets/data.json";
 
 const lottieRef = ref();
 const endCheck = ref(false);
+const checkValue = ref(false);
 
 const pause = () => {
-  if (!endCheck.value) {
-    lottieRef.value.pause();
-    endCheck.value = true;
-  }
+  //   if (!endCheck.value) {
+  lottieRef.value.pause();
+  //     endCheck.value = true;
+  //   }
 };
 const play = () => {
   lottieRef.value.play();
+};
+const stop = () => {
+  lottieRef.value.stop();
 };
 const speed = (speed) => {
   lottieRef.value.setSpeed(speed);
@@ -51,8 +57,23 @@ const forward = () => {
 const onComplete = () => {
   if (!endCheck.value) {
     endCheck.value = true;
+    if (!checkValue.value) {
+      forward();
+    } else {
+      reverse();
+    }
     console.log("end");
   }
+};
+const check = () => {
+  if (!checkValue.value) {
+    checkValue.value = true;
+    forward();
+  } else {
+    checkValue.value = false;
+    reverse();
+  }
+  play();
 };
 </script>
 
