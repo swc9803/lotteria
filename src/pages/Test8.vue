@@ -2,20 +2,20 @@
   <div class="container">
     <canvas ref="canvasRef" />
   </div>
+  <button @click="dd">click</button>
 </template>
 
 <script setup>
 import { ref, onMounted } from "vue";
 import * as PIXI from "pixi.js";
+import { gsap } from "gsap";
+import { PixiPlugin } from "gsap/PixiPlugin";
+
+gsap.registerPlugin(PixiPlugin);
+PixiPlugin.registerPIXI(PIXI);
+PIXI.utils.skipHello();
 
 const canvasRef = ref();
-
-onMounted(() => {
-  const app = createPixiApp();
-
-  draw(app);
-});
-
 const createPixiApp = () => {
   console.log(`window size(${window.innerWidth}, ${window.innerHeight})`);
   console.log(
@@ -28,11 +28,14 @@ const createPixiApp = () => {
     antialias: true,
     backgroundAlpha: true,
     view: canvasRef.value,
+    autoResize: true,
   });
 
   return app;
 };
 
+// three js과 같이 public 폴더에 위치해야 한다.
+const sprite = PIXI.Sprite.from("/test.jpg");
 const draw = (app) => {
   const graphics = new PIXI.Graphics();
   graphics.lineStyle(8, 0x008080);
@@ -40,8 +43,6 @@ const draw = (app) => {
   graphics.lineTo(800, 500);
   app.stage.addChild(graphics);
 
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const sprite = PIXI.Sprite.from(require("@/assets/test.jpg"));
   app.stage.addChild(sprite);
 
   let elapsed = 0.0;
@@ -50,6 +51,24 @@ const draw = (app) => {
     sprite.x = 100.0 + Math.cos(elapsed / 50.0) * 100.0;
   });
 };
+
+onMounted(() => {
+  const app = createPixiApp();
+
+  draw(app);
+});
+const dd = () => {
+  gsap.to(sprite, {
+    duration: 1,
+    pixi: { saturation: 0 },
+  });
+  setTimeout(() => {
+    gsap.to(sprite, {
+      duration: 1,
+      pixi: { colorize: "", colorizeAmount: 0 },
+    });
+  }, 2000);
+};
 </script>
 
 <style lang="scss" scoped>
@@ -57,7 +76,8 @@ const draw = (app) => {
   width: 100%;
   height: 100vh;
   canvas {
-    width: 80%;
+    width: 100%;
+    height: 100%;
   }
 }
 </style>

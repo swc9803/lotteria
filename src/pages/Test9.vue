@@ -50,21 +50,16 @@ const removeMaterial = (el) => {
 };
 
 const onSaveToImg = () => {
-  html2canvas(burgerRef.value).then((canvas) => {
+  html2canvas(burgerRef.value, { backgroundColor: null }).then((canvas) => {
     saveAs(canvas.toDataURL("image/png"), "burger.png");
   });
 };
 const saveAs = (uri, filename) => {
-  let link = document.createElement("a");
-  if (typeof link.download === "string") {
-    link.href = uri;
-    link.download = filename;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  } else {
-    window.open(uri);
-  }
+  const link = document.createElement("a");
+  link.href = uri;
+  link.download = filename;
+  link.click();
+  link.remove();
 };
 </script>
 
