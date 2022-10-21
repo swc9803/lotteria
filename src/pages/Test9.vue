@@ -54,16 +54,12 @@ const onSaveToImg = () => {
     backgroundColor: null,
     scale: 5,
   }).then((canvas) => {
-    saveAs(canvas.toDataURL("image/png"), "burger.png");
+    const link = document.createElement("a");
+    link.href = canvas.toDataURL("image/png");
+    link.download = "burger.png";
+    link.click();
+    link.remove();
   });
-};
-const saveAs = (uri, filename) => {
-  // transform: scale(2, 2)
-  const link = document.createElement("a");
-  link.href = uri;
-  link.download = filename;
-  link.click();
-  link.remove();
 };
 </script>
 
