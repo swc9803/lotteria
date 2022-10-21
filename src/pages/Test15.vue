@@ -26,7 +26,7 @@ const makeSticker = () => {
   const ctx = canvasRef.value.getContext("2d");
   ctx.clearRect(0, 0, canvasRef.value.width, canvasRef.value.height); // 캔버스 초기화
   ctx.save();
-  ctx.translate(canvasRef.value.width / 2, canvasRef.value.height - 300);
+  ctx.translate(canvasRef.value.width - 270, canvasRef.value.height - 270);
   ctx.rotate((-1 * angle.value) / 2);
   ctx.rotate((-1 * (angle.value / nameData.value.length)) / 2);
   ctx.font = "50px testFont";
@@ -42,15 +42,15 @@ const makeSticker = () => {
   ctx.restore();
 };
 watch(nameData, () => {
-  if (nameData.value.length < 10) {
-    makeSticker();
-  } else {
-    alert("10자 이하로 적어주세요");
-  }
   if (nameData.value.length > 4) {
     angle.value = Math.PI * 1;
   } else {
     angle.value = Math.PI * 0.5;
+  }
+  if (nameData.value.length < 10) {
+    makeSticker();
+  } else {
+    alert("10자 이하로 적어주세요");
   }
 });
 
