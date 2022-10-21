@@ -50,11 +50,15 @@ const removeMaterial = (el) => {
 };
 
 const onSaveToImg = () => {
-  html2canvas(burgerRef.value, { backgroundColor: null }).then((canvas) => {
+  html2canvas(burgerRef.value, {
+    backgroundColor: null,
+    scale: 5,
+  }).then((canvas) => {
     saveAs(canvas.toDataURL("image/png"), "burger.png");
   });
 };
 const saveAs = (uri, filename) => {
+  // transform: scale(2, 2)
   const link = document.createElement("a");
   link.href = uri;
   link.download = filename;

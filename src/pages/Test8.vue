@@ -17,53 +17,55 @@ PIXI.utils.skipHello();
 
 const canvasRef = ref();
 const createPixiApp = () => {
-  console.log(`window size(${window.innerWidth}, ${window.innerHeight})`);
-  console.log(
-    `canvas size(${canvasRef.value.width}, ${canvasRef.value.height})`
-  );
-
   const app = new PIXI.Application({
     width: window.innerWidth,
     height: window.innerHeight,
+    view: canvasRef.value,
     antialias: true,
     backgroundAlpha: true,
-    view: canvasRef.value,
-    autoResize: true,
+    resizeTo: window,
   });
-
   return app;
 };
 
 // three js과 같이 public 폴더에 위치해야 한다.
-const sprite = PIXI.Sprite.from("/test.jpg");
+const test = PIXI.Sprite.from("/test.jpg");
 const draw = (app) => {
   const graphics = new PIXI.Graphics();
+  test.scale.set(0.2);
   graphics.lineStyle(8, 0x008080);
   graphics.moveTo(0, 250);
   graphics.lineTo(800, 500);
-  app.stage.addChild(graphics);
 
-  app.stage.addChild(sprite);
+  app.stage.addChild(graphics);
+  app.stage.addChild(test);
+
+  test.interactive = true;
+  test.buttonMode = true;
+
+  test.on("pointerdown", onClick);
 
   let elapsed = 0.0;
   app.ticker.add((delta) => {
     elapsed += delta;
-    sprite.x = 100.0 + Math.cos(elapsed / 50.0) * 100.0;
+    test.x = 100.0 + Math.cos(elapsed / 50.0) * 100.0;
   });
 };
-
+function onClick() {
+  console.log("hi");
+}
 onMounted(() => {
   const app = createPixiApp();
 
   draw(app);
 });
 const dd = () => {
-  gsap.to(sprite, {
+  gsap.to(test, {
     duration: 1,
     pixi: { saturation: 0 },
   });
   setTimeout(() => {
-    gsap.to(sprite, {
+    gsap.to(test, {
       duration: 1,
       pixi: { colorize: "", colorizeAmount: 0 },
     });
