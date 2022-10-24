@@ -31,11 +31,12 @@ const makeSticker = () => {
   ctx.rotate((-1 * (angle.value / nameData.value.length)) / 2);
   ctx.font = "50px testFont";
   ctx.textAlign = "center";
-  for (let n = 0; n < nameData.value.length; n++) {
+  for (let i = 0; i < nameData.value.length; i++) {
     ctx.rotate(angle.value / nameData.value.length);
     ctx.save();
     ctx.translate(0, -1 * 180);
-    let char = nameData.value[n];
+    ctx.scale(1, -1);
+    let char = nameData.value[i];
     ctx.fillText(char, 0, 0);
     ctx.restore();
   }
@@ -81,6 +82,7 @@ const capture = () => {
 .container {
   width: 100%;
   height: 100vh;
+  font-family: "testFont";
   .stickerWrapper {
     width: 540px;
     height: 540px;
@@ -89,6 +91,9 @@ const capture = () => {
       width: 540px;
       height: 540px;
       z-index: -1;
+    }
+    canvas {
+      transform: scale(1, -1);
     }
     input {
       display: block;
