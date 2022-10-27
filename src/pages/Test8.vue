@@ -16,17 +16,6 @@ PixiPlugin.registerPIXI(PIXI);
 PIXI.utils.skipHello();
 
 const canvasRef = ref();
-const createPixiApp = () => {
-  const app = new PIXI.Application({
-    width: canvasRef.value.width,
-    height: canvasRef.value.height,
-    view: canvasRef.value,
-    antialias: true,
-    backgroundAlpha: true,
-    resizeTo: canvasRef.value,
-  });
-  return app;
-};
 
 // three js과 같이 public 폴더에 위치해야 한다.
 const test = PIXI.Sprite.from("/test.jpg");
@@ -56,7 +45,14 @@ function onClick() {
   console.log("hi");
 }
 onMounted(() => {
-  const app = createPixiApp();
+  const app = new PIXI.Application({
+    width: canvasRef.value.width,
+    height: canvasRef.value.height,
+    view: canvasRef.value,
+    antialias: true,
+    backgroundAlpha: true,
+    resizeTo: canvasRef.value,
+  });
   draw(app);
 });
 

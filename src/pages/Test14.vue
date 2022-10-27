@@ -12,18 +12,6 @@ PIXI.utils.skipHello();
 
 const canvasRef = ref();
 
-const createPixiApp = () => {
-  const app = new PIXI.Application({
-    width: canvasRef.value.width,
-    height: canvasRef.value.height,
-    view: canvasRef.value,
-    antialias: true,
-    backgroundAlpha: true,
-    resizeTo: canvasRef.value,
-  });
-  return app;
-};
-
 const draw = (app) => {
   let count = 0;
 
@@ -61,7 +49,14 @@ const draw = (app) => {
 };
 
 onMounted(() => {
-  const app = createPixiApp();
+  const app = new PIXI.Application({
+    width: canvasRef.value.width,
+    height: canvasRef.value.height,
+    view: canvasRef.value,
+    antialias: true,
+    backgroundAlpha: true,
+    resizeTo: canvasRef.value,
+  });
   draw(app);
 });
 </script>

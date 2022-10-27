@@ -16,17 +16,6 @@ PIXI.utils.skipHello();
 
 const canvasRef = ref();
 
-const createPixiApp = () => {
-  const app = new PIXI.Application({
-    width: canvasRef.value.width,
-    height: canvasRef.value.height,
-    view: canvasRef.value,
-    antialias: true,
-    backgroundAlpha: true,
-    resizeTo: canvasRef.value,
-  });
-  return app;
-};
 const draw = (app) => {
   // 원 크기
   const radius = 120;
@@ -70,7 +59,14 @@ const draw = (app) => {
 };
 
 onMounted(() => {
-  const app = createPixiApp();
+  const app = new PIXI.Application({
+    width: canvasRef.value.width,
+    height: canvasRef.value.height,
+    view: canvasRef.value,
+    antialias: true,
+    backgroundAlpha: true,
+    resizeTo: canvasRef.value,
+  });
   draw(app);
 });
 </script>
