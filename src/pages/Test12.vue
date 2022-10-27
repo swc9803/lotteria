@@ -15,23 +15,20 @@ PixiPlugin.registerPIXI(PIXI);
 PIXI.utils.skipHello();
 
 const canvasRef = ref();
-
-// test8 구조로 수정하기
-onMounted(() => {
+const createPixiApp = () => {
   const app = new PIXI.Application({
-    backgroundColor: 0xeaeaea,
-    width: window.innerWidth,
-    height: window.innerHeight,
+    width: canvasRef.value.width,
+    height: canvasRef.value.height,
     view: canvasRef.value,
     antialias: true,
     backgroundAlpha: true,
-    resizeTo: window,
+    resizeTo: canvasRef.value,
   });
+  return app;
+};
 
-  const dd = PIXI.Texture.from("/burger.png");
-
-  dd.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
-
+const dd = PIXI.Texture.from("/burger.png");
+const draw = (app) => {
   for (let i = 0; i < 10; i++) {
     createBurger(
       Math.floor(Math.random() * app.screen.width),
@@ -60,33 +57,41 @@ onMounted(() => {
 
     app.stage.addChild(burger);
   }
+};
+function onDragStart(event) {
+  this.data = event.data;
+  this.alpha = 0.5;
+  this.dragging = true;
+}
 
-  // 클릭 포함
-  function onDragStart(event) {
-    this.data = event.data;
-    this.alpha = 0.5;
-    this.dragging = true;
-  }
+function onDragEnd() {
+  this.data = null;
+  this.alpha = 1;
+  this.dragging = false;
+}
 
-  function onDragEnd() {
-    this.alpha = 1;
-    this.dragging = false;
-    this.data = null;
+function onDragMove() {
+  if (this.dragging) {
+    const newPosition = this.data.getLocalPosition(this.parent);
+    this.x = newPosition.x;
+    this.y = newPosition.y;
   }
+}
 
-  function onDragMove() {
-    if (this.dragging) {
-      const newPosition = this.data.getLocalPosition(this.parent);
-      this.x = newPosition.x;
-      this.y = newPosition.y;
-    }
-  }
+onMounted(() => {
+  const app = createPixiApp();
+  draw(app);
 });
 </script>
 
 <style lang="scss" scoped>
 .container {
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
+  canvas {
+    width: 100%;
+    height: 100%;
+  }
 }
 </style>

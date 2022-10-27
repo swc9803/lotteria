@@ -7,6 +7,12 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import(/* webpackChunkName: "home" */ "../pages/Home.vue"),
   },
   {
+    path: "/sticker",
+    name: "sticker",
+    component: () =>
+      import(/* webpackChunkName: "sticker" */ "../pages/Sticker.vue"),
+  },
+  {
     path: "/test",
     name: "test",
     component: () => import(/* webpackChunkName: "test" */ "../pages/Test.vue"),
@@ -88,12 +94,6 @@ const routes: Array<RouteRecordRaw> = [
     name: "test14",
     component: () =>
       import(/* webpackChunkName: "test14" */ "../pages/Test14.vue"),
-  },
-  {
-    path: "/test15",
-    name: "test15",
-    component: () =>
-      import(/* webpackChunkName: "test15" */ "../pages/Test15.vue"),
   },
 ];
 

@@ -1,29 +1,20 @@
 <template>
-  <div class="container">
-    <canvas ref="canvasRef" />
-  </div>
+  <div></div>
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { onMounted } from "vue";
 import * as PIXI from "pixi.js";
 
 PIXI.utils.skipHello();
-
-const canvasRef = ref();
-const createPixiApp = () => {
-  const app = new PIXI.Application({
-    width: window.innerWidth,
-    height: window.innerHeight,
-    view: canvasRef.value,
-    antialias: true,
-    backgroundAlpha: true,
-    resizeTo: canvasRef.value,
-  });
-  return app;
-};
 onMounted(() => {
-  const app = createPixiApp();
+  const app = new PIXI.Application({
+    width: 800,
+    height: 600,
+    backgroundColor: 0x1099bb,
+    resolution: window.devicePixelRatio || 1,
+  });
+  document.body.appendChild(app.view);
 
   app.loader.add("test", "test.jpg").load(build);
 
@@ -38,7 +29,7 @@ onMounted(() => {
 
     plane.x = 100;
     plane.y = 100;
-    plane.scale.set(0.5);
+    plane.scale.set(0.2);
 
     app.stage.addChild(plane);
 
@@ -54,7 +45,6 @@ onMounted(() => {
       buffer.update();
     });
   }
-  build(app);
 });
 </script>
 

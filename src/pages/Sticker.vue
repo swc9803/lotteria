@@ -14,6 +14,7 @@ import { ref, watch } from "vue";
 import html2canvas from "html2canvas";
 
 const captureRef = ref();
+// const imgRef = ref();
 const canvasRef = ref();
 const nameData = ref("");
 
@@ -23,6 +24,7 @@ const nameTyping = (e) => {
 
 const angle = ref(Math.PI * 0.5); // 각
 const makeSticker = () => {
+  //   const canvas = document.createElement("canvas");
   const ctx = canvasRef.value.getContext("2d");
   ctx.clearRect(0, 0, canvasRef.value.width, canvasRef.value.height); // 캔버스 초기화
   ctx.save();
@@ -41,6 +43,10 @@ const makeSticker = () => {
     ctx.restore();
   }
   ctx.restore();
+  //   canvas.getContext("2d").drawImage(imgRef.value, 0, 0, 540, 540);
+  //   const imgData = canvas.toDataURL("image/jpeg", 1.0);
+  //   preview.value.src = imgData;
+  //   preview.value.style.display = "block";
 };
 watch(nameData, () => {
   if (nameData.value.length > 4) {
@@ -48,7 +54,7 @@ watch(nameData, () => {
   } else {
     angle.value = Math.PI * 0.5;
   }
-  if (nameData.value.length < 10) {
+  if (nameData.value.length < 11) {
     makeSticker();
   } else {
     alert("10자 이하로 적어주세요");
@@ -94,6 +100,10 @@ const capture = () => {
     }
     canvas {
       transform: scale(1, -1);
+      //   background: url("@/assets/burger.png");
+      //   background-size: cover;
+      //   background-repeat: no-repeat;
+      //   background-position: center center;
     }
     input {
       display: block;

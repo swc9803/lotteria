@@ -1,25 +1,34 @@
 <template>
-  <div></div>
+  <div class="container">
+    <canvas ref="canvasRef" />
+  </div>
 </template>
 
 <script setup>
-import { onMounted } from "vue";
+import { ref, onMounted } from "vue";
 import * as PIXI from "pixi.js";
-import { gsap } from "gsap";
-import { PixiPlugin } from "gsap/PixiPlugin";
 
-gsap.registerPlugin(PixiPlugin);
-PixiPlugin.registerPIXI(PIXI);
 PIXI.utils.skipHello();
 
-onMounted(() => {
-  const app = new PIXI.Application();
-  document.body.appendChild(app.view);
+const canvasRef = ref();
 
+const createPixiApp = () => {
+  const app = new PIXI.Application({
+    width: canvasRef.value.width,
+    height: canvasRef.value.height,
+    view: canvasRef.value,
+    antialias: true,
+    backgroundAlpha: true,
+    resizeTo: canvasRef.value,
+  });
+  return app;
+};
+
+const draw = (app) => {
   let count = 0;
 
   // build a rope!
-  const ropeLength = 918 / 20;
+  const ropeLength = 1000 / 10;
 
   const points = [];
 
@@ -29,13 +38,13 @@ onMounted(() => {
 
   const strip = new PIXI.SimpleRope(PIXI.Texture.from("burger.png"), points);
 
-  strip.x = -459;
+  strip.x = -900;
 
   const snakeContainer = new PIXI.Container();
   snakeContainer.x = 400;
   snakeContainer.y = 300;
 
-  snakeContainer.scale.set(800 / 1100);
+  snakeContainer.scale.set(800 / 2000);
   app.stage.addChild(snakeContainer);
 
   snakeContainer.addChild(strip);
@@ -49,12 +58,22 @@ onMounted(() => {
       points[i].x = i * ropeLength + Math.cos(i * 0.3 + count) * 20;
     }
   });
+};
+
+onMounted(() => {
+  const app = createPixiApp();
+  draw(app);
 });
 </script>
 
 <style lang="scss" scoped>
 .container {
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
+  canvas {
+    width: 100%;
+    height: 100%;
+  }
 }
 </style>
