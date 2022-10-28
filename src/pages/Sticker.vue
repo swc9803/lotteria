@@ -26,9 +26,17 @@ const angle = ref(Math.PI * 0.5); // 각
 const makeSticker = () => {
   //   const canvas = document.createElement("canvas");
   const ctx = canvasRef.value.getContext("2d");
-  ctx.clearRect(0, 0, canvasRef.value.width, canvasRef.value.height); // 캔버스 초기화
+  ctx.clearRect(
+    0,
+    0,
+    canvasRef.value.offsetWidth,
+    canvasRef.value.offsetHeight
+  ); // 캔버스 초기화
   ctx.save();
-  ctx.translate(canvasRef.value.width - 270, canvasRef.value.height - 270);
+  ctx.translate(
+    canvasRef.value.offsetWidth - 270,
+    canvasRef.value.offsetHeight - 270
+  );
   ctx.rotate((-1 * angle.value) / 2);
   ctx.rotate((-1 * (angle.value / nameData.value.length)) / 2);
   ctx.font = "50px testFont";

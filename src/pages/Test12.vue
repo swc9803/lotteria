@@ -7,11 +7,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import * as PIXI from "pixi.js";
-import { gsap } from "gsap";
-import { PixiPlugin } from "gsap/PixiPlugin";
 
-gsap.registerPlugin(PixiPlugin);
-PixiPlugin.registerPIXI(PIXI);
 PIXI.utils.skipHello();
 
 const canvasRef = ref();
@@ -69,8 +65,8 @@ function onDragMove() {
 
 onMounted(() => {
   const app = new PIXI.Application({
-    width: canvasRef.value.width,
-    height: canvasRef.value.height,
+    width: canvasRef.value.offsetWidth,
+    height: canvasRef.value.offsetHeight,
     view: canvasRef.value,
     antialias: true,
     backgroundAlpha: true,

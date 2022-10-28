@@ -34,18 +34,24 @@ const minus = () => {
 onMounted(() => {
   const options = {};
   // options에 따라 인스턴스 생성
-  const io = new IntersectionObserver((entries, observer) => {
-    entries.forEach((entry) => {
-      console.log(entry);
-      if (entry.isIntersecting) {
-        plus();
-      } else {
-        minus();
-      }
-      //   관찰중지
-      //   observer.unobserve(entry.target);
-    });
-  }, options);
+  const io = new IntersectionObserver(
+    (
+      entries
+      //   observer
+    ) => {
+      entries.forEach((entry) => {
+        console.log(entry);
+        if (entry.isIntersecting) {
+          plus();
+        } else {
+          minus();
+        }
+        //   관찰중지
+        //   observer.unobserve(entry.target);
+      });
+    },
+    options
+  );
   // 타겟 요소 관찰 시작
   io.observe(dd.value);
 });

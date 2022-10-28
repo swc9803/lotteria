@@ -8,8 +8,8 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import * as PIXI from "pixi.js";
-import { gsap } from "gsap";
 import { PixiPlugin } from "gsap/PixiPlugin";
+import { gsap } from "gsap";
 
 gsap.registerPlugin(PixiPlugin);
 PixiPlugin.registerPIXI(PIXI);
@@ -46,8 +46,8 @@ function onClick() {
 }
 onMounted(() => {
   const app = new PIXI.Application({
-    width: canvasRef.value.width,
-    height: canvasRef.value.height,
+    width: canvasRef.value.offsetWidth,
+    height: canvasRef.value.offsetHeight,
     view: canvasRef.value,
     antialias: true,
     backgroundAlpha: true,
@@ -56,20 +56,20 @@ onMounted(() => {
   draw(app);
 });
 
-// const dd = () => {
-//   gsap.to([test, graphics], {
-//     duration: 1,
-//     pixi: { saturation: 0 },
-//     y: 500,
-//   });
-//   setTimeout(() => {
-//     gsap.to([test, graphics], {
-//       duration: 1,
-//       pixi: { colorize: "", colorizeAmount: 0 },
-//       y: 0,
-//     });
-//   }, 2000);
-// };
+const dd = () => {
+  gsap.to([test, graphics], {
+    duration: 1,
+    pixi: { saturation: 0 },
+    y: 500,
+  });
+  setTimeout(() => {
+    gsap.to([test, graphics], {
+      duration: 1,
+      pixi: { colorize: "", colorizeAmount: 0 },
+      y: 0,
+    });
+  }, 2000);
+};
 </script>
 
 <style lang="scss" scoped>

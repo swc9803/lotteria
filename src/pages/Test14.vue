@@ -50,8 +50,8 @@ const draw = (app) => {
 
 onMounted(() => {
   const app = new PIXI.Application({
-    width: canvasRef.value.width,
-    height: canvasRef.value.height,
+    width: canvasRef.value.offsetWidth,
+    height: canvasRef.value.offsetHeight,
     view: canvasRef.value,
     antialias: true,
     backgroundAlpha: true,
