@@ -14,7 +14,7 @@ PIXI.utils.skipHello();
 const canvasRef = ref();
 
 // Get the texture for rope.
-const trailTexture = PIXI.Texture.from("/burger.png");
+const trailTexture = PIXI.Texture.from("/trail.png");
 let historyX;
 let historyY;
 // historySize determines how long the trail will be.

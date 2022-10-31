@@ -37,15 +37,13 @@ function onResize() {
   if (canvasRef.value.offsetHeight * 4 < canvasRef.value.offsetWidth * 3) {
     // desktop
     img.width = canvasRef.value.offsetWidth;
-    img.height = canvasRef.value.offsetWidth * 0.75;
+    img.height = canvasRef.value.offsetWidth * (3 / 4);
     img.position.y = (canvasRef.value.offsetHeight - img.height) / 2;
     depthMap.position.y = (canvasRef.value.offsetHeight - img.height) / 2;
   } else {
     // mobile
-    img.width = canvasRef.value.offsetHeight * 1.33333;
+    img.width = canvasRef.value.offsetHeight * (4 / 3);
     img.height = canvasRef.value.offsetHeight;
-    depthMap.width = img.width;
-    depthMap.height = img.height;
     img.position.x = (canvasRef.value.offsetWidth - img.width) / 2;
     depthMap.position.x = (canvasRef.value.offsetWidth - img.width) / 2;
   }
