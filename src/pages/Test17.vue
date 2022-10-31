@@ -7,7 +7,6 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import * as PIXI from "pixi.js";
-import { gsap } from "gsap";
 
 PIXI.utils.skipHello();
 
@@ -30,18 +29,28 @@ const draw = (app) => {
       (canvasRef.value.offsetHeight / 2 - e.clientY) / 20;
   });
 
-  onWindowResize();
-  window.addEventListener("resize", onWindowResize);
+  onResize();
+  window.addEventListener("resize", onResize);
 };
 
-function onWindowResize() {
-  img.width = canvasRef.value.offsetWidth;
-  img.height = canvasRef.value.offsetWidth * 0.75;
-  depthMap.width = canvasRef.value.offsetWidth;
-  depthMap.height = canvasRef.value.offsetWidth * 0.75;
-  gsap.set([img, depthMap], {
-    y: (canvasRef.value.offsetHeight - img.height) / 2,
-  });
+function onResize() {
+  if (canvasRef.value.offsetHeight * 4 < canvasRef.value.offsetWidth * 3) {
+    // desktop
+    img.width = canvasRef.value.offsetWidth;
+    img.height = canvasRef.value.offsetWidth * 0.75;
+    img.position.y = (canvasRef.value.offsetHeight - img.height) / 2;
+    depthMap.position.y = (canvasRef.value.offsetHeight - img.height) / 2;
+  } else {
+    // mobile
+    img.width = canvasRef.value.offsetHeight * 1.33333;
+    img.height = canvasRef.value.offsetHeight;
+    depthMap.width = img.width;
+    depthMap.height = img.height;
+    img.position.x = (canvasRef.value.offsetWidth - img.width) / 2;
+    depthMap.position.x = (canvasRef.value.offsetWidth - img.width) / 2;
+  }
+  depthMap.width = img.width;
+  depthMap.height = img.height;
 }
 
 onMounted(() => {
