@@ -12,43 +12,32 @@ PIXI.utils.skipHello();
 
 const canvasRef = ref();
 
-let width, height;
-
 const img = new PIXI.Sprite.from("/car.jpg");
 const depthMap = new PIXI.Sprite.from("/car-map.jpg");
 
 const draw = (app) => {
-  width = canvasRef.value.offsetWidth;
-  height = canvasRef.value.offsetHeight;
-  img.width = width;
-  img.height = height;
-  depthMap.width = width;
-  depthMap.height = height;
-
   app.stage.addChild(img);
   app.stage.addChild(depthMap);
 
-  // 지정된 Depth map(깊이 정보)을 사용해, 이미지의 위치 정보를 변화시킬 수 있는 필터를 등록.
   const displacementFilter = new PIXI.filters.DisplacementFilter(depthMap);
-  // 앱 스테이지에 필터 정보를 등록.
   app.stage.filters = [displacementFilter];
 
-  // HTML 요소 내에서 마우스를 움직이면,
-  // 그 정보로 필터 정보를 수정해 원하는 효과를 구현합니다.
   canvasRef.value.onmousemove = function (e) {
-    displacementFilter.scale.x = (width / 2 - e.clientX) / 20;
-    displacementFilter.scale.y = (height / 2 - e.clientY) / 20;
+    displacementFilter.scale.x =
+      (canvasRef.value.offsetWidth / 2 - e.clientX) / 20;
+    displacementFilter.scale.y =
+      (canvasRef.value.offsetHeight / 2 - e.clientY) / 20;
   };
+
+  onWindowResize();
   window.addEventListener("resize", onWindowResize);
 };
 
 function onWindowResize() {
-  width = canvasRef.value.offsetWidth;
-  height = canvasRef.value.offsetHeight;
-  img.width = width;
-  img.height = height;
-  depthMap.width = width;
-  depthMap.height = height;
+  img.width = canvasRef.value.offsetWidth;
+  img.height = canvasRef.value.offsetHeight;
+  depthMap.width = canvasRef.value.offsetWidth;
+  depthMap.height = canvasRef.value.offsetHeight;
 }
 
 onMounted(() => {
