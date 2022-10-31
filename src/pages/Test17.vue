@@ -7,6 +7,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import * as PIXI from "pixi.js";
+import { gsap } from "gsap";
 
 PIXI.utils.skipHello();
 
@@ -22,12 +23,12 @@ const draw = (app) => {
   const displacementFilter = new PIXI.filters.DisplacementFilter(depthMap);
   app.stage.filters = [displacementFilter];
 
-  canvasRef.value.onmousemove = function (e) {
+  document.addEventListener("pointermove", (e) => {
     displacementFilter.scale.x =
       (canvasRef.value.offsetWidth / 2 - e.clientX) / 20;
     displacementFilter.scale.y =
       (canvasRef.value.offsetHeight / 2 - e.clientY) / 20;
-  };
+  });
 
   onWindowResize();
   window.addEventListener("resize", onWindowResize);
@@ -35,9 +36,12 @@ const draw = (app) => {
 
 function onWindowResize() {
   img.width = canvasRef.value.offsetWidth;
-  img.height = canvasRef.value.offsetHeight;
+  img.height = canvasRef.value.offsetWidth * 0.75;
   depthMap.width = canvasRef.value.offsetWidth;
-  depthMap.height = canvasRef.value.offsetHeight;
+  depthMap.height = canvasRef.value.offsetWidth * 0.75;
+  gsap.set([img, depthMap], {
+    y: (canvasRef.value.offsetHeight - img.height) / 2,
+  });
 }
 
 onMounted(() => {
