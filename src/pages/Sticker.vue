@@ -14,7 +14,6 @@ import { ref, watch } from "vue";
 import html2canvas from "html2canvas";
 
 const captureRef = ref();
-// const imgRef = ref();
 const canvasRef = ref();
 const nameData = ref("");
 
@@ -24,14 +23,14 @@ const nameTyping = (e) => {
 
 const angle = ref(Math.PI * 0.5); // 각
 const makeSticker = () => {
-  //   const canvas = document.createElement("canvas");
   const ctx = canvasRef.value.getContext("2d");
+  // 캔버스 초기화
   ctx.clearRect(
     0,
     0,
     canvasRef.value.offsetWidth,
     canvasRef.value.offsetHeight
-  ); // 캔버스 초기화
+  );
   ctx.save();
   ctx.translate(
     canvasRef.value.offsetWidth - 270,
@@ -45,16 +44,12 @@ const makeSticker = () => {
     ctx.rotate(angle.value / nameData.value.length);
     ctx.save();
     ctx.translate(0, -1 * 180);
-    ctx.scale(1, -1);
+    // ctx.scale(1, -1);
     let char = nameData.value[i];
     ctx.fillText(char, 0, 0);
     ctx.restore();
   }
   ctx.restore();
-  //   canvas.getContext("2d").drawImage(imgRef.value, 0, 0, 540, 540);
-  //   const imgData = canvas.toDataURL("image/jpeg", 1.0);
-  //   preview.value.src = imgData;
-  //   preview.value.style.display = "block";
 };
 watch(nameData, () => {
   if (nameData.value.length > 4) {
@@ -73,6 +68,7 @@ const capture = () => {
   if (nameData.value) {
     html2canvas(captureRef.value, {
       backgroundColor: null,
+      //  최대한 1080에 맞춰서
       scale: 2,
     }).then((canvas) => {
       const link = document.createElement("a");
@@ -107,7 +103,7 @@ const capture = () => {
       z-index: -1;
     }
     canvas {
-      transform: scale(1, -1);
+      //   transform: scale(1, -1);
       //   background: url("@/assets/burger.png");
       //   background-size: cover;
       //   background-repeat: no-repeat;

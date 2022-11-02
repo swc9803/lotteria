@@ -13,6 +13,12 @@ const routes: Array<RouteRecordRaw> = [
       import(/* webpackChunkName: "sticker" */ "../pages/Sticker.vue"),
   },
   {
+    path: "/swiper",
+    name: "swiper",
+    component: () =>
+      import(/* webpackChunkName: "swiper" */ "../pages/Swiper.vue"),
+  },
+  {
     path: "/test",
     name: "test",
     component: () => import(/* webpackChunkName: "test" */ "../pages/Test.vue"),
