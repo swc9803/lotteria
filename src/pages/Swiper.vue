@@ -27,12 +27,13 @@ import "swiper/css/pagination";
 </script>
 
 <style lang="scss">
+// scoped 없음
 @import "@/assets/swiper-pagination.scss";
 
 .container {
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
+  //   width: 100%;
+  //   height: 100vh;
+  //   overflow: hidden;
   .slider {
     height: 500px;
     .slide {
