@@ -8,4 +8,7 @@ body {
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   margin: 0;
 }
+p {
+  margin: 0;
+}
 </style>

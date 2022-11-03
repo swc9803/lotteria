@@ -36,11 +36,6 @@
   <p>dd</p>
   <p>dd</p>
   <p>dd</p>
-  <p>dd</p>
-  <p>dd</p>
-  <p>dd</p>
-  <p>dd</p>
-  <p>dd</p>
 </template>
 
 <script setup>
@@ -124,7 +119,7 @@ const selectPre = () => {
 .container {
   width: 100%;
   height: 100vh;
-  overflow: hidden;
+  //   overflow: hidden;
   .wrapper {
     width: 100%;
     // height: 500px;
