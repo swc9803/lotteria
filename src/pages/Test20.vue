@@ -8,41 +8,35 @@
       :auto-play="false"
       background-color="transparent"
       :animation-data="toggleMenu"
-      @click="play"
+      @click="toggleMenuPlay"
     />
-    {{ reverseCheck }}
   </div>
-  <button @click="reversePlay">reversePlay</button>
 </template>
 
 <script setup>
 import { ref } from "vue";
 import { Vue3Lottie } from "vue3-lottie";
 
-import toggleMenu from "@/assets/menu/0-02-00_logo_button.json";
+import toggleMenu from "@/assets/menu/0-03-00_hamburger_button.json";
 
 const lottieWrapperRef = ref();
 const logoLottieRef = ref();
 
-const reverseCheck = ref(false);
+const reverseCheck = ref(true);
 
-const play = () => {
+const toggleMenuPlay = () => {
   if (reverseCheck.value === false) {
     reverseCheck.value = true;
-    lottieWrapperRef.value.style.pointerEvents = "none";
     logoLottieRef.value.play();
-    setTimeout(() => {
+    if (reverseCheck.value === true) {
       logoLottieRef.value.setDirection("reverse");
-      lottieWrapperRef.value.style.pointerEvents = "auto";
-    }, 1000);
+    }
   } else {
     reverseCheck.value = false;
-    lottieWrapperRef.value.style.pointerEvents = "none";
     logoLottieRef.value.play();
-    setTimeout(() => {
+    if (reverseCheck.value === false) {
       logoLottieRef.value.setDirection("forward");
-      lottieWrapperRef.value.style.pointerEvents = "auto";
-    }, 1000);
+    }
   }
 };
 </script>
