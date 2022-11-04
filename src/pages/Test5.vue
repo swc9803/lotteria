@@ -18,7 +18,6 @@
     <button @click="speed(3)">speed3</button>
     <button @click="reverse">reverse</button>
     <button @click="forward">forward</button>
-    <button @click="getDuration">getDuration</button>
     <input type="checkbox" @change="check" />
   </div>
 </template>
@@ -55,9 +54,7 @@ const reverse = () => {
 const forward = () => {
   lottieRef.value.setDirection("forward");
 };
-const getDuration = () => {
-  lottieRef.value.getDuration();
-};
+
 const onComplete = () => {
   if (!endCheck.value) {
     endCheck.value = true;
