@@ -1,12 +1,14 @@
 <template>
   <h1>2023 카운터</h1>
-  <p ref="counterRef" />
+  <p>{{ dayRef }}</p>
+  <p>{{ counterRef }}</p>
 </template>
 
 <script setup>
 import { ref, onMounted } from "vue";
 
-const counterRef = ref();
+const dayRef = ref("");
+const counterRef = ref("");
 
 const dueDate = new Date("01/01/2023 00:00 AM"); // D-day
 const _second = 1000;
@@ -27,12 +29,14 @@ const countDown = () => {
   const minutes = Math.floor((toDueDate % _hour) / _minute);
   const seconds = Math.floor((toDueDate % _minute) / _second);
 
-  counterRef.value.innerText = `D-${formatTime(days)}\n`;
-  counterRef.value.innerText += `${formatTime(hours)}`;
-  counterRef.value.innerText += `:${formatTime(minutes)}`;
-  counterRef.value.innerText += `:${formatTime(seconds)}`;
+  dayRef.value = `D-${formatTime(days)}`;
+  counterRef.value = `${formatTime(hours)}`;
+  counterRef.value += `:${formatTime(minutes)}`;
+  counterRef.value += `:${formatTime(seconds)}`;
 };
+
 onMounted(() => {
+  countDown();
   setInterval(countDown, 1000);
 });
 </script>
