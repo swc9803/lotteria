@@ -30,21 +30,11 @@ const sizeValue = ref(50);
 const input = ref();
 
 const fontColor = [
-  {
-    color: "black",
-  },
-  {
-    color: "brown",
-  },
-  {
-    color: "red",
-  },
-  {
-    color: "blue",
-  },
-  {
-    color: "green",
-  },
+  { color: "black" },
+  { color: "brown" },
+  { color: "red" },
+  { color: "blue" },
+  { color: "green" },
 ];
 
 const changeFont = (font) => {

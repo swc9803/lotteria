@@ -4,7 +4,7 @@
       ref="lottieRef"
       width="50%"
       height="50%"
-      :loop="true"
+      :loop="false"
       :auto-play="false"
       background-color="transparent"
       :animation-data="coffee"
@@ -18,6 +18,7 @@
     <button @click="speed(3)">speed3</button>
     <button @click="reverse">reverse</button>
     <button @click="forward">forward</button>
+    <button @click="getDuration">getDuration</button>
     <input type="checkbox" @change="check" />
   </div>
 </template>
@@ -27,7 +28,7 @@ import { ref } from "vue";
 import { Vue3Lottie } from "vue3-lottie";
 import "vue3-lottie/dist/style.css";
 
-import coffee from "@/assets/data.json";
+import coffee from "@/assets/menu/0-03-00_hamburger_button.json";
 
 const lottieRef = ref();
 const endCheck = ref(false);
@@ -53,6 +54,9 @@ const reverse = () => {
 };
 const forward = () => {
   lottieRef.value.setDirection("forward");
+};
+const getDuration = () => {
+  lottieRef.value.getDuration();
 };
 const onComplete = () => {
   if (!endCheck.value) {
@@ -80,6 +84,7 @@ const check = () => {
 <style lang="scss" scoped>
 .container {
   width: 100%;
-  //   height: 100vh;
+  height: 100vh;
+  background: darkgray;
 }
 </style>

@@ -1,4 +1,5 @@
 <template>
+  <div class="blank" />
   <div class="container">
     <div class="wrapper">
       <div class="menu">
@@ -18,29 +19,33 @@
         </div>
       </div>
       <div v-show="showDes">폰트 설명</div>
+      <div class="circle">
+        {{ focusWord }}
+      </div>
       <div v-show="showPre" class="sample">
-        <!-- grid로 처리해보기 -->
         <div
-          v-for="letter in literal"
+          v-for="(letter, i) in literal"
           :key="letter.id"
+          :ref="letterRef"
           :data-title="letter.word"
           class="sample-block"
+          @mousemove="log(i)"
         >
           {{ letter.word }}
         </div>
       </div>
     </div>
   </div>
-  <p>dd</p>
-  <p>dd</p>
-  <p>dd</p>
-  <p>dd</p>
-  <p>dd</p>
+  <div class="blank" />
+  <div class="blank" />
 </template>
 
 <script setup>
 import { ref } from "vue";
 
+const focusWord = ref("");
+const letterArray = ref([]);
+const letterRef = (el) => letterArray.value.push(el);
 const literal = [
   { word: "Aa" },
   { word: "Bb" },
@@ -101,6 +106,10 @@ const literal = [
 const showDes = ref(true);
 const showPre = ref(false);
 
+const log = (i) => {
+  focusWord.value = letterArray.value[i].getAttribute("data-title");
+};
+
 const selectDes = () => {
   if (showDes.value === false) {
     showDes.value = true;
@@ -118,14 +127,41 @@ const selectPre = () => {
 <style lang="scss" scoped>
 .container {
   width: 100%;
-  height: 100vh;
-  //   overflow: hidden;
+  height: 500px;
+  //   //   overflow: hidden;
   .wrapper {
+    position: relative;
+    top: 0;
     width: 100%;
-    // height: 500px;
+    height: 1000px;
     background: #01ae21;
     border-radius: 1em 1em 0 0;
     // overflow: hidden;
+    .circle {
+      position: sticky;
+      top: 42.5%;
+      left: 70%;
+      width: 30vw;
+      height: 30vw;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 30vw;
+      font-size: 20vw;
+      background: linear-gradient(
+          rgba(255, 255, 255, 0.4),
+          rgba(255, 255, 255, 0.4)
+        ),
+        url("~@/assets/burger.png") center/cover;
+      z-index: 5;
+      @media screen and (max-width: 480px) {
+        & {
+          width: 45vw;
+          height: 45vw;
+          line-height: 45vw;
+          font-size: 25vw;
+        }
+      }
+    }
     .menu {
       display: flex;
       height: 40px;
@@ -153,7 +189,7 @@ const selectPre = () => {
       display: flex;
       flex-wrap: wrap;
       position: relative;
-      left: -0.5px;
+      left: -1px;
       top: -1px;
       &-block {
         width: calc(10% + 1px);
@@ -163,28 +199,36 @@ const selectPre = () => {
         left: 1px;
         margin-left: -1px;
         margin-top: -1px;
-        line-height: calc(10vw - 2px);
+        line-height: 10vw;
         text-align: center;
         font-size: 5vw;
         color: white;
         background: #01ae21;
         border: 1px solid #7ddf8e;
         box-sizing: border-box;
-        &:hover:before {
-          opacity: 1;
-        }
-        &:before {
-          position: absolute;
-          content: attr(data-title);
-          width: 25vw;
-          height: 25vw;
-          line-height: 25vw;
-          font-size: 15vw;
-          color: black;
-          background: rgba(255, 255, 255, 0.9);
-          z-index: 1;
-          opacity: 0;
-          pointer-events: none;
+        // &:hover:before {
+        //   opacity: 1;
+        // }
+        // &:before {
+        //   position: absolute;
+        //   content: attr(data-title);
+        //   width: 25vw;
+        //   height: 25vw;
+        //   line-height: 25vw;
+        //   font-size: 15vw;
+        //   color: black;
+        //   background: rgba(255, 255, 255, 0.9);
+        //   z-index: 1;
+        //   opacity: 0;
+        //   pointer-events: none;
+        // }
+      }
+      @media screen and (max-width: 480px) {
+        &-block {
+          width: calc(20% + 1px);
+          height: 20vw;
+          line-height: 20vw;
+          font-size: 10vw;
         }
       }
     }

@@ -11,4 +11,9 @@ body {
 p {
   margin: 0;
 }
+.blank {
+  width: 100%;
+  height: 100vh;
+  background: rgb(190, 190, 190);
+}
 </style>
