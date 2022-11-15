@@ -16,7 +16,7 @@
 }
 .swiper-pagination-bullet-active {
   background: #9F0802;
-  &::after {
+  &:after {
     content: '';
     position: absolute;
     top: 5px;

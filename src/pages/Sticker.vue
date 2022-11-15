@@ -38,7 +38,7 @@ const makeSticker = () => {
   );
   ctx.rotate((-1 * angle.value) / 2);
   ctx.rotate((-1 * (angle.value / nameData.value.length)) / 2);
-  ctx.font = "50px testFont";
+  ctx.font = "50px chab";
   ctx.textAlign = "center";
   for (let i = 0; i < nameData.value.length; i++) {
     ctx.rotate(angle.value / nameData.value.length);
@@ -53,7 +53,7 @@ const makeSticker = () => {
 };
 watch(nameData, () => {
   if (nameData.value.length > 4) {
-    angle.value = Math.PI * 1;
+    angle.value = Math.PI * 0.7;
   } else {
     angle.value = Math.PI * 0.5;
   }
@@ -85,14 +85,14 @@ const capture = () => {
 
 <style lang="scss" scoped>
 @font-face {
-  font-family: "testFont";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2207-01@1.0/RixInooAriDuriR.woff2")
-    format("woff2");
+  font-family: "chab";
+  src: url("~@/assets/chabTest.otf") format("truetype");
+  font-style: normal;
 }
 .container {
   width: 100%;
   height: 100vh;
-  font-family: "testFont";
+  font-family: "chab";
   .stickerWrapper {
     width: 540px;
     height: 540px;

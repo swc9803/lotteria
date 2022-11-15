@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <swiper
+    <Swiper
       class="slider"
       :modules="[Pagination, Autoplay]"
       :loop="true"
@@ -12,10 +12,10 @@
       }"
       direction="vertical"
     >
-      <swiper-slide v-for="(slide, index) in 5" :key="slide.id" class="slide">
+      <SwiperSlide v-for="(slide, index) in 5" :key="slide.id" class="slide">
         <p>hi i am {{ index + 1 }}</p>
-      </swiper-slide>
-    </swiper>
+      </SwiperSlide>
+    </Swiper>
   </div>
 </template>
 
@@ -37,7 +37,7 @@ import "swiper/css/pagination";
   .slider {
     height: 500px;
     .slide {
-      background: rgb(206, 206, 206);
+      background: #ffd519;
     }
   }
 }

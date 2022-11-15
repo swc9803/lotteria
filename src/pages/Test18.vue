@@ -102,13 +102,13 @@ const showDes = ref(true);
 const showPre = ref(false);
 
 const selectDes = () => {
-  if (showDes.value === false) {
+  if (!showDes.value) {
     showDes.value = true;
     showPre.value = false;
   }
 };
 const selectPre = () => {
-  if (showPre.value === false) {
+  if (!showPre.value) {
     showPre.value = true;
     showDes.value = false;
   }

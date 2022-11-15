@@ -31,6 +31,39 @@ const routes: Array<RouteRecordRaw> = [
       import(/* webpackChunkName: "sticky" */ "../pages/Sticky.vue"),
   },
   {
+    path: "/menu",
+    name: "menu",
+    component: () => import(/* webpackChunkName: "menu" */ "../pages/Menu.vue"),
+  },
+  {
+    path: "/make",
+    name: "make",
+    component: () => import(/* webpackChunkName: "make" */ "../pages/Make.vue"),
+  },
+  {
+    path: "/experience",
+    name: "experience",
+    component: () =>
+      import(/* webpackChunkName: "experience" */ "../pages/Experience.vue"),
+  },
+  {
+    path: "/drag",
+    name: "drag",
+    component: () => import(/* webpackChunkName: "drag" */ "../pages/Drag.vue"),
+  },
+  {
+    path: "/typing",
+    name: "typing",
+    component: () =>
+      import(/* webpackChunkName: "typing" */ "../pages/Typing.vue"),
+  },
+  {
+    path: "/stack",
+    name: "stack",
+    component: () =>
+      import(/* webpackChunkName: "stack" */ "../pages/Stack.vue"),
+  },
+  {
     path: "/test",
     name: "test",
     component: () => import(/* webpackChunkName: "test" */ "../pages/Test.vue"),

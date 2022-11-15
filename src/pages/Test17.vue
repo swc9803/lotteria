@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <canvas ref="canvasRef" />
+    <canvas ref="canvasRef" @mousemove="mapMove" />
   </div>
 </template>
 
@@ -10,27 +10,30 @@ import * as PIXI from "pixi.js";
 
 PIXI.utils.skipHello();
 
+let displacementFilter;
 const canvasRef = ref();
 
-const img = new PIXI.Sprite.from("/car.jpg");
-const depthMap = new PIXI.Sprite.from("/car-map.jpg");
+// const img = new PIXI.Sprite.from("/train.jpg");
+// const depthMap = new PIXI.Sprite.from("/train-map.png");
+const img = PIXI.Sprite.from("https://i.imgur.com/x8Lhx01.jpg");
+const depthMap = PIXI.Sprite.from("https://i.imgur.com/7JE0ABT.jpg");
 
 const draw = (app) => {
   app.stage.addChild(img);
   app.stage.addChild(depthMap);
 
-  const displacementFilter = new PIXI.filters.DisplacementFilter(depthMap);
+  displacementFilter = new PIXI.filters.DisplacementFilter(depthMap);
   app.stage.filters = [displacementFilter];
-
-  document.addEventListener("pointermove", (e) => {
-    displacementFilter.scale.x =
-      (canvasRef.value.offsetWidth / 2 - e.clientX) / 20;
-    displacementFilter.scale.y =
-      (canvasRef.value.offsetHeight / 2 - e.clientY) / 20;
-  });
 
   onResize();
   window.addEventListener("resize", onResize);
+};
+
+const mapMove = (e) => {
+  displacementFilter.scale.x =
+    (canvasRef.value.offsetWidth / 2 - e.clientX) / 25;
+  displacementFilter.scale.y =
+    (canvasRef.value.offsetHeight / 2 - e.clientY) / 25;
 };
 
 function onResize() {
