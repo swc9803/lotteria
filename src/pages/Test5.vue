@@ -27,7 +27,7 @@ import { ref } from "vue";
 import { Vue3Lottie } from "vue3-lottie";
 import "vue3-lottie/dist/style.css";
 
-import coffee from "@/assets/menu/0-03-00_hamburger_button.json";
+import coffee from "@/assets/dsa.json";
 
 const lottieRef = ref();
 const endCheck = ref(false);
@@ -63,7 +63,7 @@ const onComplete = () => {
     } else {
       reverse();
     }
-    console.log("end");
+    // console.log("end");
   }
 };
 const check = () => {
@@ -82,6 +82,6 @@ const check = () => {
 .container {
   width: 100%;
   height: 100vh;
-  background: darkgray;
+  background: rgb(229, 229, 229);
 }
 </style>

@@ -42,7 +42,7 @@ const draw = (app) => {
 };
 
 function onClick() {
-  console.log("hi");
+  dd();
 }
 onMounted(() => {
   const app = new PIXI.Application({

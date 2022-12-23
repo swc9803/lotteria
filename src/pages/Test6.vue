@@ -1,5 +1,10 @@
 <template>
-  <div ref="containerRef" class="container" @mousemove="move">
+  <div
+    ref="containerRef"
+    class="container"
+    @mousemove="move"
+    @touchmove.passive="move"
+  >
     <div ref="lightRef" class="light" />
     <div ref="hideRef" class="hide" />
   </div>

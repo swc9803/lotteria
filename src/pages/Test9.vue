@@ -45,7 +45,6 @@ const addMaterial = (el) => {
   });
 };
 const removeMaterial = (el) => {
-  console.log(el);
   materialsArray.value.splice(el, 1);
 };
 

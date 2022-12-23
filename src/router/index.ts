@@ -7,16 +7,21 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import(/* webpackChunkName: "home" */ "../pages/Home.vue"),
   },
   {
+    path: "/star",
+    name: "star",
+    component: () => import(/* webpackChunkName: "star" */ "../pages/Star.vue"),
+  },
+  {
     path: "/sticker",
     name: "sticker",
     component: () =>
       import(/* webpackChunkName: "sticker" */ "../pages/Sticker.vue"),
   },
   {
-    path: "/swiper",
-    name: "swiper",
+    path: "/newyear",
+    name: "newyear",
     component: () =>
-      import(/* webpackChunkName: "swiper" */ "../pages/Swiper.vue"),
+      import(/* webpackChunkName: "newyear" */ "../pages/NewYear.vue"),
   },
   {
     path: "/count",
@@ -25,48 +30,30 @@ const routes: Array<RouteRecordRaw> = [
       import(/* webpackChunkName: "count" */ "../pages/Count.vue"),
   },
   {
-    path: "/sticky",
-    name: "sticky",
+    path: "/dragtest",
+    name: "dragtest",
     component: () =>
-      import(/* webpackChunkName: "sticky" */ "../pages/Sticky.vue"),
+      import(/* webpackChunkName: "dragtest" */ "../pages/DragTest.vue"),
   },
   {
-    path: "/menu",
-    name: "menu",
-    component: () => import(/* webpackChunkName: "menu" */ "../pages/Menu.vue"),
-  },
-  {
-    path: "/make",
-    name: "make",
-    component: () => import(/* webpackChunkName: "make" */ "../pages/Make.vue"),
-  },
-  {
-    path: "/experience",
-    name: "experience",
+    path: "/speech",
+    name: "speech",
     component: () =>
-      import(/* webpackChunkName: "experience" */ "../pages/Experience.vue"),
+      import(/* webpackChunkName: "speech" */ "../pages/Speech.vue"),
   },
   {
-    path: "/drag",
-    name: "drag",
-    component: () => import(/* webpackChunkName: "drag" */ "../pages/Drag.vue"),
-  },
-  {
-    path: "/typing",
-    name: "typing",
+    path: "/squigglytext",
+    name: "squigglytext",
     component: () =>
-      import(/* webpackChunkName: "typing" */ "../pages/Typing.vue"),
+      import(
+        /* webpackChunkName: "squigglytext" */ "../pages/SquigglyText.vue"
+      ),
   },
   {
-    path: "/stack",
-    name: "stack",
+    path: "/test1",
+    name: "test1",
     component: () =>
-      import(/* webpackChunkName: "stack" */ "../pages/Stack.vue"),
-  },
-  {
-    path: "/test",
-    name: "test",
-    component: () => import(/* webpackChunkName: "test" */ "../pages/Test.vue"),
+      import(/* webpackChunkName: "test1" */ "../pages/Test1.vue"),
   },
   {
     path: "/test2",
@@ -99,12 +86,6 @@ const routes: Array<RouteRecordRaw> = [
       import(/* webpackChunkName: "test6" */ "../pages/Test6.vue"),
   },
   {
-    path: "/test7",
-    name: "test7",
-    component: () =>
-      import(/* webpackChunkName: "test7" */ "../pages/Test7.vue"),
-  },
-  {
     path: "/test8",
     name: "test8",
     component: () =>
@@ -115,12 +96,6 @@ const routes: Array<RouteRecordRaw> = [
     name: "test9",
     component: () =>
       import(/* webpackChunkName: "test9" */ "../pages/Test9.vue"),
-  },
-  {
-    path: "/test10",
-    name: "test10",
-    component: () =>
-      import(/* webpackChunkName: "test10" */ "../pages/Test10.vue"),
   },
   {
     path: "/test11",
@@ -147,40 +122,10 @@ const routes: Array<RouteRecordRaw> = [
       import(/* webpackChunkName: "test14" */ "../pages/Test14.vue"),
   },
   {
-    path: "/test15",
-    name: "test15",
-    component: () =>
-      import(/* webpackChunkName: "test15" */ "../pages/Test15.vue"),
-  },
-  {
-    path: "/test16",
-    name: "test16",
-    component: () =>
-      import(/* webpackChunkName: "test16" */ "../pages/Test16.vue"),
-  },
-  {
     path: "/test17",
     name: "test17",
     component: () =>
       import(/* webpackChunkName: "test17" */ "../pages/Test17.vue"),
-  },
-  {
-    path: "/test18",
-    name: "test18",
-    component: () =>
-      import(/* webpackChunkName: "test18" */ "../pages/Test18.vue"),
-  },
-  {
-    path: "/test19",
-    name: "test19",
-    component: () =>
-      import(/* webpackChunkName: "test19" */ "../pages/Test19.vue"),
-  },
-  {
-    path: "/test20",
-    name: "test20",
-    component: () =>
-      import(/* webpackChunkName: "test20" */ "../pages/Test20.vue"),
   },
 ];
 

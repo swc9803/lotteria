@@ -1,6 +1,11 @@
 <template>
+  <nav>
+    <router-link to="test1">test1</router-link>
+    <router-link to="test2">test2</router-link>
+    <router-link to="test3">test3</router-link>
+    <router-link to="star">star</router-link>
+  </nav>
   <router-view />
-  <div class="blank">공백</div>
 </template>
 
 <style lang="scss">
@@ -18,6 +23,11 @@ body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   margin: 0;
+}
+nav {
+  a {
+    margin-right: 10px;
+  }
 }
 p {
   margin: 0;
